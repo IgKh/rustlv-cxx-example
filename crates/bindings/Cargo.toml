@@ -1,0 +1,11 @@
+[package]
+name = "bindings"
+version = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+magiclib = { path = "../magiclib" }
+cxx = "1.0"
