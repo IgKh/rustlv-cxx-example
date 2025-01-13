@@ -1,3 +1,9 @@
+#[derive(thiserror::Error, Debug)]
+pub enum Error {
+    #[error("source is empty")]
+    EmptySource,
+}
+
 pub trait LogSink {
     fn log_message(&self, message: &str);
 }
@@ -11,7 +17,10 @@ impl PageExtractor {
         Self { logger }
     }
 
-    pub fn extract_from_pdf(&mut self, source: &[u8]) -> Result<Vec<String>, std::io::Error> {
+    pub fn extract_from_pdf(&mut self, source: &[u8]) -> Result<Vec<String>, Error> {
+        if source.is_empty() {
+            return Err(Error::EmptySource);
+        }
         self.logger.log_message(&format!("Got source of {} bytes", source.len()));
         Ok(vec!["First text".to_string(), "Second text".to_string()])
     }

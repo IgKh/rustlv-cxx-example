@@ -27,7 +27,7 @@ struct PageExtractorWrapper {
 }
 
 impl PageExtractorWrapper {
-    fn extract_from_pdf(&mut self, source: &[u8]) -> Result<Vec<String>, std::io::Error> {
+    fn extract_from_pdf(&mut self, source: &[u8]) -> Result<Vec<String>, magiclib::Error> {
         self.inner.extract_from_pdf(source)
     }
 }
